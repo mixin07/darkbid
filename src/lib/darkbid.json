@@ -1,0 +1,276 @@
+{
+  "version": "0.1.0",
+  "name": "darkbid",
+  "instructions": [
+    {
+      "name": "createAuction",
+      "accounts": [
+        {
+          "name": "auction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "reservePrice",
+          "type": "u64"
+        },
+        {
+          "name": "durationSeconds",
+          "type": "i64"
+        },
+        {
+          "name": "revealDurationSeconds",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "commitBid",
+      "accounts": [
+        {
+          "name": "auction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "bid",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "bidder",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "hashedBid",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "bidAmount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "revealBid",
+      "accounts": [
+        {
+          "name": "auction",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "bid",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "bidder",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "nonce",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "settleAuction",
+      "accounts": [
+        {
+          "name": "auction",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Auction",
+      "fields": [
+        {
+          "name": "authority",
+          "type": "publicKey"
+        },
+        {
+          "name": "tokenMint",
+          "type": "publicKey"
+        },
+        {
+          "name": "reservePrice",
+          "type": "u64"
+        },
+        {
+          "name": "endTime",
+          "type": "i64"
+        },
+        {
+          "name": "revealEndTime",
+          "type": "i64"
+        },
+        {
+          "name": "bidCount",
+          "type": "u32"
+        },
+        {
+          "name": "revealCount",
+          "type": "u32"
+        },
+        {
+          "name": "status",
+          "type": {
+            "defined": "AuctionStatus"
+          }
+        },
+        {
+          "name": "winner",
+          "type": {
+            "option": "publicKey"
+          }
+        },
+        {
+          "name": "winningBid",
+          "type": "u64"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "Bid",
+      "fields": [
+        {
+          "name": "auction",
+          "type": "publicKey"
+        },
+        {
+          "name": "bidder",
+          "type": "publicKey"
+        },
+        {
+          "name": "hashedBid",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "revealedAmount",
+          "type": "u64"
+        },
+        {
+          "name": "isRevealed",
+          "type": "bool"
+        },
+        {
+          "name": "isWinner",
+          "type": "bool"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "AuctionStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Revealing"
+          },
+          {
+            "name": "Settling"
+          },
+          {
+            "name": "Completed"
+          },
+          {
+            "name": "Cancelled"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "AuctionEnded",
+      "msg": "Auction has already ended"
+    },
+    {
+      "code": 6001,
+      "name": "AuctionNotActive",
+      "msg": "Auction is not active"
+    },
+    {
+      "code": 6002,
+      "name": "BidBelowReserve",
+      "msg": "Bid is below the reserve price"
+    },
+    {
+      "code": 6003,
+      "name": "RevealTooEarly",
+      "msg": "Reveal phase has not started yet"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidReveal",
+      "msg": "Reveal does not match original bid"
+    },
+    {
+      "code": 6005,
+      "name": "AuctionCancelled",
+      "msg": "Auction has been cancelled"
+    }
+  ]
+}

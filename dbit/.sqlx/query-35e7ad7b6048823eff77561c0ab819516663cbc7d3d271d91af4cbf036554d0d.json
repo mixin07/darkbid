@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE auctions\n        SET    status = 'REVEAL'\n        WHERE  status = 'ACTIVE'\n          AND  commit_end_at <= $1\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Timestamptz"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "35e7ad7b6048823eff77561c0ab819516663cbc7d3d271d91af4cbf036554d0d"
+}

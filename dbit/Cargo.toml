@@ -1,0 +1,53 @@
+[package]
+name = "dbit"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = { version = "0.7", features = ["json"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dotenvy = "0.15"
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "migrate"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+thiserror = "1"
+jsonwebtoken = "9"
+argon2 = "0.5"
+tower-http = { version = "0.6", features = ["trace", "cors"] }
+sha2 = "0.10"
+hex = "0.4"
+
+# ── Dev3: Zero-Knowledge proof verification ──────────────────────────────────
+# Groth16 verifier (arkworks ecosystem)
+ark-groth16  = { version = "0.4", default-features = false, features = ["parallel"] }
+# BN254 (= BN128) pairing curve – matches the circom/snarkjs default
+ark-bn254    = { version = "0.4", default-features = false }
+# Serialization helpers (compressed point encoding/decoding)
+ark-serialize = { version = "0.4", default-features = false }
+# Field arithmetic primitives
+ark-ff       = { version = "0.4", default-features = false }
+# Elliptic-curve group operations
+ark-ec       = { version = "0.4", default-features = false }
+# Big-integer parsing of snarkjs decimal field elements
+num-bigint   = "0.4"
+
+# ── Auth: wallet-signature login ─────────────────────────────────────────────
+# Ed25519 signature verification (Solana keypairs use Ed25519)
+ed25519-dalek = { version = "2", features = ["std"] }
+# Base58 encoding/decoding (Solana addresses & signatures)
+bs58          = "0.5"
+# Secure random nonce generation
+rand          = "0.8"
+
+# ── Solana RPC: transaction verification ─────────────────────────────────────
+# HTTP client for JSON-RPC calls to a Solana validator
+reqwest       = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+
+[dev-dependencies]
+# tower::ServiceExt::oneshot for in-process HTTP testing
+tower         = { version = "0.5", features = ["util"] }
+

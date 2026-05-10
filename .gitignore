@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Circuit artifacts
+circuits/bid_range/*.r1cs
+circuits/bid_range/*.zkey
+circuits/bid_range/*.ptau
+circuits/bid_range/*.sym
+circuits/bid_range/bid_range_js/
+circuits/bid_range/*.sol

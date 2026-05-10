@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO auth_nonces (wallet_address, nonce, expires_at)\n        VALUES ($1, $2, $3)\n        ON CONFLICT (wallet_address)\n        DO UPDATE SET nonce = EXCLUDED.nonce,\n                      expires_at = EXCLUDED.expires_at,\n                      created_at = NOW()\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Timestamptz"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "286a3ef3a4617c478dbc4e1b2b5af7d075d57c0c540da6d554f733af6d958b97"
+}

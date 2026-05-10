@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Backgrounds */
+  --bg-base:         #080B14;
+  --bg-surface:      #0D1120;
+  --bg-elevated:     #121829;
+  --bg-overlay:      #1A2236;
+
+  /* Borders */
+  --border-subtle:   #1E2A42;
+  --border-default:  #2A3A5C;
+  --border-strong:   #3D5080;
+
+  /* Violet — Primary */
+  --violet-200:      #C4B0FF;
+  --violet-400:      #9D7FEA;
+  --violet-500:      #7C5CBF;
+  --violet-600:      #6344A8;
+  --violet-900:      #1E1440;
+
+  /* Cyan — Accent */
+  --cyan-300:        #67E8F9;
+  --cyan-400:        #22D3EE;
+
+  /* Semantic */
+  --success:         #34D399;
+  --success-bg:      #0A2D22;
+  --warning:         #FBBF24;
+  --warning-bg:      #2D1F0A;
+  --error:           #F87171;
+  --error-bg:        #2D0A0A;
+  --pending:         #A78BFA;
+  --pending-bg:      #1A1040;
+
+  /* Text */
+  --text-primary:    #E8EEFF;
+  --text-secondary:  #94A3C0;
+  --text-muted:      #4A5A7A;
+
+  /* Typography */
+  --font-sans:       'Inter', -apple-system, sans-serif;
+  --font-mono:       'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --shadow-card:     0 1px 3px rgba(0,0,0,0.4);
+  --shadow-raised:   0 4px 16px rgba(0,0,0,0.5);
+  --glow-violet:     0 0 24px rgba(124,92,191,0.25);
+  --glow-success:    0 0 24px rgba(52,211,153,0.2);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #7C5CBF 0%, #4A3A8A 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* All numbers use mono font */
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* WALLET BUTTON STYLES */
+/* ─────────────────────────────────────────────────────────── */
+
+.wallet-btn {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-default);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.wallet-btn--connect {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.wallet-btn--connect:hover {
+  border-color: var(--violet-400);
+  color: var(--violet-200);
+  box-shadow: var(--glow-violet);
+}
+
+.wallet-btn--connected {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wallet-btn--loading {
+  background: transparent;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.wallet-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.wallet-connected {
+  position: relative;
+}
+
+.wallet-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 12px;
+  min-width: 220px;
+  box-shadow: var(--shadow-raised);
+  z-index: 100;
+}
+
+.wallet-full-address {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  word-break: break-all;
+  margin-bottom: 10px;
+}
+
+.wallet-disconnect {
+  width: 100%;
+  padding: 8px;
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wallet-disconnect:hover {
+  background: var(--error);
+  color: white;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* COUNTDOWN TIMER STYLES */
+/* ─────────────────────────────────────────────────────────── */
+
+.countdown__display {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: color 0.5s ease;
+}
+
+.countdown__bar {
+  width: 100%;
+  height: 3px;
+  background: var(--border-subtle);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.countdown__progress {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* BID FORM STYLES */
+/* ─────────────────────────────────────────────────────────── */
+
+.bid-form {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.bid-form__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bid-form__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.bid-form__input-group label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.bid-input {
+  background: var(--bg-base);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 12px;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.bid-input:focus {
+  outline: none;
+  border-color: var(--violet-400);
+  box-shadow: var(--glow-violet);
+}
+
+.bid-form__balance {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.bid-form__error {
+  font-size: 12px;
+  color: var(--error);
+  margin-bottom: 12px;
+}
+
+.bid-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+}
+
+.bid-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-violet);
+}
+
+.bid-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.bid-form__disclaimer {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* UTILITY CLASSES */
+/* ─────────────────────────────────────────────────────────── */
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.bg-elevated {
+  background-color: var(--bg-elevated);
+}
+
+.border-default {
+  border: 1px solid var(--border-default);
+}
+
+.rounded-lg {
+  border-radius: 12px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.p-6 {
+  padding: 24px;
+}

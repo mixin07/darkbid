@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            UPDATE auctions\n            SET    winner_bid_id = (\n                SELECT id\n                FROM   bids\n                WHERE  auction_id    = $1\n                  AND  is_valid      = true\n                  AND  reveal_amount IS NOT NULL\n                ORDER BY reveal_amount DESC,\n                         commit_at    ASC,\n                         bidder_id    ASC\n                LIMIT 1\n            )\n            WHERE id = $1\n              AND winner_bid_id IS NULL\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "ec0b8fbfd2caef3f2a30acd14b59341cea30e08c8f20dc4551fa73aea65396d3"
+}
